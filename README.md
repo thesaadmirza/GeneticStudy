@@ -4,6 +4,7 @@ This repository contains the code used to support a study on Genetic Algorithms 
 - Knapsack problem
 - Locomotion problem
 - Symbolic Regression problem
+The GAs are implemented in Python and Go languages.
 
 ## TSP
 TSP is the problem of finding in a fully connected graph the minimal Hamiltonian cycle.
@@ -15,4 +16,4 @@ Given a set of items, each with a value and a weight, the Knapsack problem is th
 Given a 3D model with 20 joints, that represents a human being, this problem consists in determining the movements of each joint of the model in a fixed interval of time, such that on a physics simulated environment, the model reaches the maximal distance from the starting point, without falling down.
 
 ## Symbolic Regression
-The symbolic regression problem is the problem of determining a function that best approximate a set of points; but unlike "classical" regression, this function has to be built combining a set of fixed primitives. 
+The symbolic regression problem is the problem of determining a function that best approximate a set of points; but unlike "classical" regression, this function has to be built combining a set of fixed primitives.
