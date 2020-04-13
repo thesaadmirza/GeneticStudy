@@ -4,6 +4,7 @@ This repository contains the code used to support a study on Genetic Algorithms 
 - Knapsack problem
 - Locomotion problem
 - Symbolic Regression problem
+<a/>
 The GAs are implemented in Python and Go languages.
 
 ## TSP
