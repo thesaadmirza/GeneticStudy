@@ -300,6 +300,7 @@ def main():
                     f.write(str(ids)+","+str(0.0)+",-\n")
             return 0
     best = 9e+31
+
     bestown = -1
     for i in range(MNRS):
         own,sol = startSearcher(i)
