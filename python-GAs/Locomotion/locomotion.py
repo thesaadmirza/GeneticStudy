@@ -33,12 +33,12 @@ MU = 12
 LAMBDA = 25
 CXPB = 0.6
 MUTPB = 0.4
-print tp,repetition,":"
+print(tp,repetition,":")
 random.seed(repetition)
 
 best_scored = []
 if repetition>0 and tp=="Coop":
-    print "import best shared solutions"
+    print("import best shared solutions")
     with open(FOLDER_RES+"/"+tp+str(repetition-1)+".txt","r") as f:
         rawlist = []
         for row in f.readlines():
@@ -54,7 +54,7 @@ if repetition>0 and tp=="Coop":
         rawlist.sort(key=lambda x: x["eval"], reverse=True)
         for i in range(5):
             s = rawlist[i]
-            print s["id"],s["eval"],len(s["sol"])
+            print(s["id"],s["eval"],len(s["sol"]))
             best_scored.append(s["sol"])
 
 
@@ -192,7 +192,7 @@ def MyeaMuPlusLambda(ids,population, toolbox, mu, lambda_, cxpb, mutpb, ngen,
     record = stats.compile(population) if stats is not None else {}
     logbook.record(gen=0, nevals=len(invalid_ind), **record)
     if verbose:
-        print logbook.stream
+        print(logbook.stream)
     # Begin the generational process
     for gen in range(1, ngen + 1):
         # Vary the population
@@ -211,7 +211,7 @@ def MyeaMuPlusLambda(ids,population, toolbox, mu, lambda_, cxpb, mutpb, ngen,
         record = stats.compile(population) if stats is not None else {}
         logbook.record(gen=gen, nevals=len(invalid_ind), **record)
         if verbose:
-            print logbook.stream
+            print(logbook.stream)
     return population, logbook
 
 
@@ -225,10 +225,9 @@ def startSearcher(ids):
     pop2,_ = MyeaMuPlusLambda(str(ids),pop,toolbox,MU,
            LAMBDA,CXPB,MUTPB,NGEN,stats=stats,halloffame=hof,verbose=True)
     savePopulation(pop2,str(ids))
-    print len(pop2)
-    print ids,",",hof[0].fitness.values
+
     parz = json.dumps(hof[0])
-    print "parz:",parz
+
     # parz = parz[parz.find("(")+1:parz.rfind(")")]
     with open(FOLDER_RES+"/"+tp+str(repetition)+".txt", "a+") as f:
         f.write(str(ids)+","+str(hof[0].fitness.values[0])
@@ -243,4 +242,4 @@ if __name__ == "__main__":
         if(sol[0]>best):
             best = sol[0]
             bestown = own
-        print "current best:",best,"[from ",bestown,"]","[",tp,NAME,repetition,"]"
+        print("current best:",best,"[from ",bestown,"]","[",tp,NAME,repetition,"]")

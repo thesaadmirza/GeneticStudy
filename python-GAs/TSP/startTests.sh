@@ -7,7 +7,7 @@
 tp=$1
 hd=$2
 cd "./tsp_json/$2/"
-for f in ./*.json; do
+for f in ./*/*.json; do
     ffr=${f##*/}
     nm=${ffr%%.json}
     ../executor.sh $nm $tp

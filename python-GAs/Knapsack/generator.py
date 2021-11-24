@@ -26,4 +26,4 @@ for i in range(10):
     p = gen_problem(n,limit,max(100,math.ceil(0.2*limit+random.randint(1,10))),1)
     with open("problems/2/knap"+str(i)+"_"+str(n)+".json","w") as f:
         json.dump(p,f)
-print "done!"
+print("done!")

@@ -7,9 +7,9 @@
 tp=$1
 hd=$2
 cd "./problems/$2/"
-for f in ./*.json; do
+for f in ./*/*.json; do
     ffr=${f##*/}
     nm=${ffr%%.json}
-    ../executor.sh $nm $tp
+    ./executor.sh $nm $tp
 done
 cd ../..

@@ -6,6 +6,7 @@ mkdir -p $mainfold
 mkdir -p "$mainfold/results"
 for i in $(seq 0 $REP); do
   mkdir -p "$mainfold/pop_$i"
-  echo "$nm [$tp $i]"
-  python ../../knapsack.py $nm $tp $i
+  echo "$nm [$tp $i] $mainfold"
+
+  python3 ../knapsack.py $nm $tp $i $REP
 done

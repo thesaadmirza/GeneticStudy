@@ -20,10 +20,12 @@ from deap import tools
 from deap import gp
 
 # symbolic regression
-
+import os.path
+xrange = range
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 NAME = sys.argv[1]
 tp = str(sys.argv[2])
-repetition = int(sys.argv[3])
+repetition = 0
 FOLDER_POP = NAME+"/pop_"+str(repetition)
 FOLDER_POPPREV = NAME+"/pop_"+str(repetition-1)
 FOLDER_RES = NAME+"/results"
@@ -31,8 +33,8 @@ MAXTERMS = 40
 
 inputs = []
 outputs = []
-
-with open(NAME+".json", "r") as knap_data:
+filepath = BASE_DIR + '/problems/' + str(tp) + '/' + NAME + '.json'
+with open(filepath, "r") as knap_data:
     probl = json.load(knap_data)
     inputs = probl["x"]
     outputs = probl["y"]
@@ -43,7 +45,7 @@ POP = 300
 OFFSPR = 150
 GEN = 100
 MNRS = 100
-print tp,repetition,":"
+print(tp,repetition,":")
 random.seed(repetition)
 
 def mydiv(x,y):
@@ -66,7 +68,7 @@ pset.addTerminal(0.0)
 best_raw = []
 best_scored = []
 if repetition>0 and tp=="Coop":
-    print "import best shared solutions"
+    print("import best shared solutions")
     with open(FOLDER_RES+"/"+tp+str(repetition-1)+".txt","r") as f:
         rawlist = []
         for row in f.readlines():
@@ -86,7 +88,7 @@ if repetition>0 and tp=="Coop":
         if float(best_raw[0]["eval"])!=0.0:
             for i in range(50):
                 s = rawlist[i]
-                print s["id"],s["eval"]#,s["sol"][0],len(s["sol"])
+                print(s["id"],s["eval"])#,s["sol"][0],len(s["sol"])
                 sol = s["sol"]
                 best_scored.append(gp.PrimitiveTree.from_string(sol,pset))
 
@@ -206,7 +208,7 @@ def MyeaMuPlusLambda(ids,population, toolbox, mu, lambda_, cxpb, mutpb, ngen,
     record = stats.compile(population) if stats is not None else {}
     logbook.record(gen=0, nevals=len(invalid_ind), **record)
     if verbose:
-        print logbook.stream
+        print(logbook.stream)
     # Begin the generational process
     for gen in range(1, ngen + 1):
         # Vary the population
@@ -225,7 +227,7 @@ def MyeaMuPlusLambda(ids,population, toolbox, mu, lambda_, cxpb, mutpb, ngen,
         record = stats.compile(population) if stats is not None else {}
         logbook.record(gen=gen, nevals=len(invalid_ind), **record)
         if verbose:
-            print logbook.stream
+            print(logbook.stream)
     return population, logbook
 
 
@@ -278,11 +280,10 @@ def startSearcher(ids):
     pop2,_ = MyeaMuPlusLambda(str(ids),pop,toolbox,OFFSPR,
            OFFSPR,0.7,0.2,GEN,stats=stats,halloffame=hof,verbose=False)
     savePopulation(pop2,str(ids))
-    print len(pop2)
-    print ids,",",hof[0].fitness.values
+
     parz = str(hof[0])
     # print parz
-    print solToString(hof[0])
+
     parz = parz[parz.find("(")+1:parz.rfind(")")]
     with open(FOLDER_RES+"/"+tp+str(repetition)+".txt", "a+") as f:
         f.write(str(ids)+","+str(hof[0].fitness.values[0])
@@ -290,7 +291,7 @@ def startSearcher(ids):
     return ids,hof[0].fitness.values
 
 def main():
-    print "best_raw",best_raw
+
     if len(best_raw)>0:
         if float(best_raw[0]["eval"])==0.0:
             for i in range(MNRS):
@@ -305,7 +306,7 @@ def main():
         if(sol[0]<best):
             best = sol[0]
             bestown = own
-        print "current best:",best,"[from ",bestown,"]","[",tp,NAME,repetition,"]"
+        print("current best:",best,"[from ",bestown,"]","[",tp,NAME,repetition,"]")
 
 if __name__ == "__main__":
     main()
