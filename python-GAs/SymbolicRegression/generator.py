@@ -41,4 +41,4 @@ for i in range(len(fs)):
     p = {"x":x,"y":y}
     with open("problems/approx"+str(i)+".json","w") as f:
         json.dump(p,f)
-print "done!"
+print("done!")

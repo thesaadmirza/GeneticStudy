@@ -7,5 +7,5 @@ mkdir -p "$mainfold/results"
 for i in $(seq 0 $REP); do
   mkdir -p "$mainfold/pop_$i"
   echo "$nm [$tp $i]"
-  python ../../compareGas.py $nm $tp $i
+  python ../compareGas.py $nm $tp $i
 done

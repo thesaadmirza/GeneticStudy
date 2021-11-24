@@ -34,7 +34,7 @@ POP = 600
 OFFSPR = 300
 GEN = 100
 MNRS = 100
-print tp,repetition,":"
+print(tp,repetition,":")
 # repetition = 6
 # tp = "Sing"# Sing o Coop
 random.seed(repetition)
@@ -42,7 +42,7 @@ random.seed(repetition)
 
 best_scored = []
 if repetition>0 and tp=="Coop":
-    print "import best shared solutions"
+    print( "import best shared solutions")
     with open(FOLDER_RES+"/"+tp+str(repetition-1)+".txt","r") as f:
         rawlist = []
         for row in f.readlines():
@@ -58,7 +58,7 @@ if repetition>0 and tp=="Coop":
         rawlist.sort(key=lambda x: x["eval"], reverse=False)
         for i in range(50):
             s = rawlist[i]
-            print s["id"],s["eval"],s["sol"][0],len(s["sol"])
+            print(s["id"],s["eval"],s["sol"][0],len(s["sol"]))
             best_scored.append([int(x) for x in s["sol"]])
 
 def evalTSP(individual):
@@ -126,7 +126,7 @@ def MyvarOr(ids,population, toolbox, lambda_, cxpb, mutpb):
         "The sum of the crossover and mutation probabilities must be smaller "
         "or equal to 1.0.")
     offspring = []
-    for _ in xrange(lambda_):
+    for _ in range(lambda_):
         op_choice = random.random()
         if op_choice < cxpb:            # Apply crossover
             ind1, ind2 = map(toolbox.clone, random.sample(population, 2))
@@ -160,7 +160,7 @@ def MyeaMuPlusLambda(ids,population, toolbox, mu, lambda_, cxpb, mutpb, ngen,
     record = stats.compile(population) if stats is not None else {}
     logbook.record(gen=0, nevals=len(invalid_ind), **record)
     if verbose:
-        print logbook.stream
+        print( logbook.stream)
     # Begin the generational process
     for gen in range(1, ngen + 1):
         # Vary the population
@@ -179,7 +179,7 @@ def MyeaMuPlusLambda(ids,population, toolbox, mu, lambda_, cxpb, mutpb, ngen,
         record = stats.compile(population) if stats is not None else {}
         logbook.record(gen=gen, nevals=len(invalid_ind), **record)
         if verbose:
-            print logbook.stream
+            print(logbook.stream)
     return population, logbook
 
 
@@ -193,8 +193,8 @@ def startSearcher(ids):
            OFFSPR,0.7,0.2,GEN,stats=stats,halloffame=hof,verbose=False)
     #return pop, stats, hof
     savePopulation(pop2,str(ids))
-    print len(pop2)
-    print ids,",",hof[0].fitness.values[0]
+    print(len(pop2))
+    print(ids,",",hof[0].fitness.values[0])
     with open(FOLDER_RES+"/"+tp+str(repetition)+".txt", "a+") as f:
         f.write(str(ids)+","+str(hof[0].fitness.values[0])
             +","+str(hof[0].tolist())+"\n")
@@ -209,4 +209,4 @@ if __name__ == "__main__":
         if(sol<best):
             best = sol
             bestown = own
-        print "current best:",best,"[from ",bestown,"]","[",tp,repetition,"]"
+        print("current best:",best,"[from ",bestown,"]","[",tp,repetition,"]")

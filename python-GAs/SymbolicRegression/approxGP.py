@@ -19,6 +19,9 @@ from deap import creator
 from deap import tools
 from deap import gp
 
+import pydevd_pycharm
+pydevd_pycharm.settrace('localhost', port=9000, stdoutToServer=True, stderrToServer=True)
+
 # symbolic regression
 import os.path
 xrange = range

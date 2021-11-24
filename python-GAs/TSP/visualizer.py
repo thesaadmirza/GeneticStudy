@@ -114,5 +114,5 @@ plt.tight_layout()
 plt.savefig("tsp_tot.png")
 plt.show()
 
-print "coop best:",mean_coop_best[len(mean_coop_best)-1]/float(len(problems))
-print "sing best:",mean_sing_best[len(mean_coop_best)-1]/float(len(problems))
+print("coop best:",mean_coop_best[len(mean_coop_best)-1]/float(len(problems)))
+print("sing best:",mean_sing_best[len(mean_coop_best)-1]/float(len(problems)))
